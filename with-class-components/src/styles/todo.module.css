@@ -1,0 +1,47 @@
+.body {
+  width: 35%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+
+.box {
+  width: 85%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 0 10px;
+  margin: auto 0;
+}
+
+.deleteIcon {
+  color: #f72b2b;
+  height: inherit;
+  cursor: pointer;
+}
+
+.dragIcon {
+  color: #494949;
+  height: inherit;
+  cursor: pointer;
+}
+
+.checkboxIcon {
+  color: #494949;
+  height: inherit;
+  cursor: pointer;
+}
+
+.text {
+  width: 93%;
+  overflow: hidden;
+}
+
+.striked {
+  text-decoration: line-through;
+}
