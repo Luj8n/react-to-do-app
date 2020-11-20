@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/todo.module.css";
 import { AiFillDelete } from "react-icons/ai";
 import { MdDragHandle } from "react-icons/md";
@@ -9,37 +9,62 @@ function Todo({ text, remove, id, done, changeState, reOrder }) {
   const [initialY, setInitialY] = useState(undefined);
   const [moving, setMoving] = useState(false);
 
-  function startDrag(e) {
-    setInitialY(e.clientY);
+  const startDrag = (e) => {
     setMoving(true);
-    window.addEventListener("mousemove", drag);
-    window.addEventListener("mouseup", endDrag);
-  }
+    setInitialY(e.clientY);
+  };
 
-  function drag(e) {
+  const drag = (e) => {
     console.log(initialY);
     setOffSetY(e.clientY - initialY);
-  }
+  };
 
-  function endDrag(e) {
-    window.removeEventListener("mousemove", drag);
-    window.removeEventListener("mouseup", endDrag);
+  const endDrag = (e) => {
     setOffSetY(0);
-    setMoving(false);
     // calculates position change relative to the body (0 - no change)
     let positionChange =
-      e.clientY - initialY >= 0 ? Math.floor((e.clientY - initialY) / 50) : Math.ceil((e.clientY - initialY) / 50);
+      e.clientY - initialY >= 0
+        ? Math.floor((e.clientY - initialY) / 50)
+        : Math.ceil((e.clientY - initialY) / 50);
     if (positionChange !== 0) reOrder(positionChange, id);
-  }
+    setMoving(false);
+  };
+
+  const addListeners = () => {
+    window.addEventListener("mousemove", drag);
+    window.addEventListener("mouseup", endDrag);
+  };
+
+  const removeListeners = () => {
+    window.removeEventListener("mousemove", drag);
+    window.removeEventListener("mouseup", endDrag);
+  };
+
+  useEffect(() => {
+    if (moving) {
+      console.log("added");
+      addListeners();
+    } else {
+      console.log("removed");
+      removeListeners();
+    }
+    return () => {
+      removeListeners();
+    };
+  }, [moving]);
 
   let isDoneIcon;
   let textStyle;
   let bodyStyle;
   if (done) {
-    isDoneIcon = <FiCheckSquare className={styles.checkboxIcon} size="30px" onClick={() => changeState(id)} />;
+    isDoneIcon = (
+      <FiCheckSquare className={styles.checkboxIcon} size="30px" onClick={() => changeState(id)} />
+    );
     textStyle = `${styles.striked} ${styles.text}`;
   } else {
-    isDoneIcon = <FiSquare className={styles.checkboxIcon} size="30px" onClick={() => changeState(id)} />;
+    isDoneIcon = (
+      <FiSquare className={styles.checkboxIcon} size="30px" onClick={() => changeState(id)} />
+    );
     textStyle = styles.text;
   }
   //if the body is moving, then translate the Y of the body and make user-select: none
