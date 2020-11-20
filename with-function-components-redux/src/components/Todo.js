@@ -15,17 +15,16 @@ function Todo({ text, remove, id, done, changeState, reOrder }) {
   };
 
   const drag = (e) => {
-    console.log(initialY);
     setOffSetY(e.clientY - initialY);
   };
 
   const endDrag = (e) => {
     setOffSetY(0);
+    setInitialY(undefined);
     // calculates position change relative to the body (0 - no change)
     let positionChange =
-      e.clientY - initialY >= 0
-        ? Math.floor((e.clientY - initialY) / 50)
-        : Math.ceil((e.clientY - initialY) / 50);
+      e.clientY - initialY >= 0 ? Math.floor((e.clientY - initialY) / 50) : Math.ceil((e.clientY - initialY) / 50);
+    console.log(positionChange);
     if (positionChange !== 0) reOrder(positionChange, id);
     setMoving(false);
   };
@@ -42,13 +41,12 @@ function Todo({ text, remove, id, done, changeState, reOrder }) {
 
   useEffect(() => {
     if (moving) {
-      console.log("added");
       addListeners();
     } else {
-      console.log("removed");
       removeListeners();
     }
     return () => {
+      setOffSetY(0);
       removeListeners();
     };
   }, [moving]);
@@ -57,14 +55,10 @@ function Todo({ text, remove, id, done, changeState, reOrder }) {
   let textStyle;
   let bodyStyle;
   if (done) {
-    isDoneIcon = (
-      <FiCheckSquare className={styles.checkboxIcon} size="30px" onClick={() => changeState(id)} />
-    );
+    isDoneIcon = <FiCheckSquare className={styles.checkboxIcon} size="30px" onClick={() => changeState(id)} />;
     textStyle = `${styles.striked} ${styles.text}`;
   } else {
-    isDoneIcon = (
-      <FiSquare className={styles.checkboxIcon} size="30px" onClick={() => changeState(id)} />
-    );
+    isDoneIcon = <FiSquare className={styles.checkboxIcon} size="30px" onClick={() => changeState(id)} />;
     textStyle = styles.text;
   }
   //if the body is moving, then translate the Y of the body and make user-select: none
