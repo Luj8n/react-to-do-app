@@ -22,9 +22,12 @@ function Todo({ text, remove, id, done, changeState, reOrder }) {
     setOffSetY(0);
     setInitialY(undefined);
     // calculates position change relative to the body (0 - no change)
-    let positionChange =
-      e.clientY - initialY >= 0 ? Math.floor((e.clientY - initialY) / 50) : Math.ceil((e.clientY - initialY) / 50);
-    console.log(positionChange);
+    let positionChange;
+    if (e.clientY - initialY >= 0) {
+      positionChange = Math.floor((e.clientY - initialY) / 50);
+    } else {
+      positionChange = Math.ceil((e.clientY - initialY) / 50);
+    }
     if (positionChange !== 0) reOrder(positionChange, id);
     setMoving(false);
   };
