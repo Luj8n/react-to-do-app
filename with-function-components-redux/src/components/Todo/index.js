@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "../styles/todo.module.css";
+import styles from "./todo.module.css";
 import { AiFillDelete } from "react-icons/ai";
 import { MdDragHandle } from "react-icons/md";
 import { FiSquare, FiCheckSquare } from "react-icons/fi";

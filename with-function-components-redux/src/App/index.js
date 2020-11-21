@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct } from "./redux/actions";
-import AddTodo from "./components/AddTodo";
-import Todo from "./components/Todo";
-import styles from "./styles/main.module.css";
+import { addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct } from "../redux/actions";
+import AddTodo from "../components/AddTodo";
+import Todo from "../components/Todo";
+import styles from "./main.module.css";
 
 function App({ addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, todos }) {
   const addTodo = (text) => {

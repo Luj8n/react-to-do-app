@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../styles/addTodo.module.css";
+import styles from "./addTodo.module.css";
 import { AiFillPlusSquare } from "react-icons/ai";
 
 function AddTodo({ add }) {
