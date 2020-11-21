@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct } from "../redux/actions";
+import { getTodos } from "../redux/selectors";
 import AddTodo from "../components/AddTodo";
 import Todo from "../components/Todo";
 import styles from "./main.module.css";
@@ -43,7 +44,7 @@ function App({ addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, todos }
 }
 
 function mapStateToProps(state) {
-  return { todos: state.todos.todos };
+  return getTodos(state);
 }
 
 export default connect(mapStateToProps, { addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct })(App);

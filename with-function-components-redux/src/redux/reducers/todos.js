@@ -11,23 +11,21 @@ let defaultTodos = [
   },
 ];
 
-function todos(state = { todos: defaultTodos }, action) {
+function todos(state = defaultTodos, action) {
   switch (action.type) {
     case "ADD_TODO":
       let { name, isDone } = action.payload;
-      let nextId = state.todos ? state.todos.reduce((maxId, el) => Math.max(maxId, el.id), 0) + 1 : 0;
-      return { todos: [...state.todos, { name, isDone, id: nextId }] };
+      let nextId = state ? state.reduce((maxId, el) => Math.max(maxId, el.id), 0) + 1 : 0;
+      return [...state, { name, isDone, id: nextId }];
     case "REMOVE_TODO":
-      return { todos: state.todos.filter((el) => el.id !== action.payload.id) };
+      return state.filter((el) => el.id !== action.payload.id);
     case "CHANGE_TODO":
-      return {
-        todos: state.todos.map((el) => (el.id === action.payload.id ? { ...el, isDone: !el.isDone } : el)),
-      };
+      return state.map((el) => (el.id === action.payload.id ? { ...el, isDone: !el.isDone } : el));
     case "REORDER_TODO":
       let currentIndex;
       let item;
 
-      let todosWithoutItem = state.todos.filter((el, index) => {
+      let todosWithoutItem = state.filter((el, index) => {
         if (action.payload.id === el.id) {
           // get the item we are moving and its index
           item = el;
@@ -41,11 +39,11 @@ function todos(state = { todos: defaultTodos }, action) {
       let nextIndex = currentIndex + action.payload.positionChange;
       if (nextIndex < 0) {
         nextIndex = 0;
-      } else if (nextIndex > state.todos.length) {
-        nextIndex = state.todos.length;
+      } else if (nextIndex > state.length) {
+        nextIndex = state.length;
       }
 
-      return { todos: [...todosWithoutItem.slice(0, nextIndex), item, ...todosWithoutItem.slice(nextIndex)] };
+      return [...todosWithoutItem.slice(0, nextIndex), item, ...todosWithoutItem.slice(nextIndex)];
     default:
       return state;
   }
