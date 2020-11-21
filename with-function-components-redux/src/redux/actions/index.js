@@ -25,3 +25,7 @@ export function reOrderTodoAct(data) {
     payload: data,
   };
 }
+
+export function changeCounterAct(type, payload) {
+  return { type, payload };
+}

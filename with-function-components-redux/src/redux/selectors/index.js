@@ -1,5 +1,7 @@
 export function getTodos(state) {
-  return {
-    todos: state.todos,
-  };
+  return state.todos;
+}
+
+export function getCounter(state) {
+  return state.counter;
 }
