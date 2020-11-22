@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, changeCounterAct } from "../redux/actions";
 import { getTodos, getCounter } from "../redux/selectors";
@@ -7,16 +7,18 @@ import Todo from "../components/Todo";
 import styles from "./main.module.css";
 
 function App({ addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, todos, changeCounterAct, counter }) {
+  useEffect(() => {
+    console.log(counter);
+  }, [counter]);
+
   const addTodo = (text) => {
     addTodoAct({ name: text, isDone: false });
     changeCounterAct("INC", 1);
-    console.log(counter);
   };
 
   const deleteTodo = (id) => {
     removeTodoAct({ id });
     changeCounterAct("DEC", 1);
-    console.log(counter);
   };
 
   const changeTodoState = (id) => {

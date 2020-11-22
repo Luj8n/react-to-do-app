@@ -1,3 +1,5 @@
+// with normal (hierarchy) store
+
 export function getTodos(state) {
   return state.todos;
 }
