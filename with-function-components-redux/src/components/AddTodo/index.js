@@ -5,14 +5,14 @@ import { AiFillPlusSquare } from "react-icons/ai";
 function AddTodo({ add }) {
   const [inputValue, setInputValue] = useState("");
 
-  function handleInput(e) {
+  const handleInput = (e) => {
     setInputValue(e.target.value);
-  }
+  };
 
-  function addTodo() {
+  const addTodo = () => {
     add(inputValue);
     setInputValue("");
-  }
+  };
 
   return (
     <div className={styles.body}>

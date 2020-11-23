@@ -1,31 +1,43 @@
-export function addTodoAct(data) {
+import { ADD_TODO, REMOVE_TODO, CHANGE_TODO, REORDER_TODO, INCREMENT, DECREMENT } from "../types";
+
+export function addTodoAct(payload) {
   return {
-    type: "ADD_TODO",
-    payload: data,
+    type: ADD_TODO,
+    payload,
   };
 }
 
-export function removeTodoAct(data) {
+export function removeTodoAct(payload) {
   return {
-    type: "REMOVE_TODO",
-    payload: data,
+    type: REMOVE_TODO,
+    payload,
   };
 }
 
-export function changeTodoAct(data) {
+export function changeTodoAct(payload) {
   return {
-    type: "CHANGE_TODO",
-    payload: data,
+    type: CHANGE_TODO,
+    payload,
   };
 }
 
-export function reOrderTodoAct(data) {
+export function reOrderTodoAct(payload) {
   return {
-    type: "REORDER_TODO",
-    payload: data,
+    type: REORDER_TODO,
+    payload,
   };
 }
 
-export function changeCounterAct(type, payload) {
-  return { type, payload };
+export function incrementAct(payload) {
+  return {
+    type: INCREMENT,
+    payload,
+  };
+}
+
+export function decrementAct(payload) {
+  return {
+    type: DECREMENT,
+    payload,
+  };
 }

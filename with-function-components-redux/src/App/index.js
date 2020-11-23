@@ -1,24 +1,24 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, changeCounterAct } from "../redux/actions";
+import { addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, incrementAct, decrementAct } from "../redux/actions";
 import { getTodos, getCounter } from "../redux/selectors";
 import AddTodo from "../components/AddTodo";
 import Todo from "../components/Todo";
 import styles from "./main.module.css";
 
-function App({ addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, todos, changeCounterAct, counter }) {
+function App({ addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, todos, incrementAct, decrementAct, counter }) {
   useEffect(() => {
     console.log(counter);
   }, [counter]);
 
   const addTodo = (text) => {
     addTodoAct({ name: text, isDone: false });
-    changeCounterAct("INC", 1);
+    incrementAct(1);
   };
 
   const deleteTodo = (id) => {
     removeTodoAct({ id });
-    changeCounterAct("DEC", 1);
+    decrementAct(1);
   };
 
   const changeTodoState = (id) => {
@@ -49,13 +49,13 @@ function App({ addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, todos, 
   );
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     todos: getTodos(state),
     counter: getCounter(state),
   };
-}
+};
 
-export default connect(mapStateToProps, { addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, changeCounterAct })(
-  App
-);
+const mapDispatchToProps = { addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, incrementAct, decrementAct };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
