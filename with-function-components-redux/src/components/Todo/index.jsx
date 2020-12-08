@@ -4,7 +4,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { MdDragHandle } from "react-icons/md";
 import { FiSquare, FiCheckSquare } from "react-icons/fi";
 
-function Todo({ text, remove, id, done, changeState, reOrder }) {
+const Todo = ({ text, remove, id, done, changeState, reOrder }) => {
   const [offSetY, setOffSetY] = useState(0);
   const [initialY, setInitialY] = useState(undefined);
   const [moving, setMoving] = useState(false);
@@ -81,6 +81,6 @@ function Todo({ text, remove, id, done, changeState, reOrder }) {
       <AiFillDelete className={styles.deleteIcon} size="30px" onClick={() => remove(id)} />
     </div>
   );
-}
+};
 
 export default Todo;

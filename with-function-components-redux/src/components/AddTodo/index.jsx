@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./addTodo.module.css";
 import { AiFillPlusSquare } from "react-icons/ai";
 
-function AddTodo({ add }) {
+const AddTodo = ({ add }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleInput = (e) => {
@@ -20,6 +20,6 @@ function AddTodo({ add }) {
       <AiFillPlusSquare className={styles.icon} size="30px" onClick={addTodo} />
     </div>
   );
-}
+};
 
 export default AddTodo;

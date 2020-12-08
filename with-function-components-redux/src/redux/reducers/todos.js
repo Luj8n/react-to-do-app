@@ -1,6 +1,6 @@
 import { ADD_TODO, REMOVE_TODO, CHANGE_TODO, REORDER_TODO } from "../types";
 
-let defaultTodos = [
+const defaultTodos = [
   {
     name: "Something",
     isDone: false,
@@ -16,8 +16,8 @@ let defaultTodos = [
 function todos(state = defaultTodos, action) {
   switch (action.type) {
     case ADD_TODO:
-      let { name, isDone } = action.payload;
-      let nextId = state ? state.reduce((maxId, el) => Math.max(maxId, el.id), 0) + 1 : 0;
+      const { name, isDone } = action.payload;
+      const nextId = state ? state.reduce((maxId, el) => Math.max(maxId, el.id), 0) + 1 : 0;
       return [...state, { name, isDone, id: nextId }];
     case REMOVE_TODO:
       return state.filter((el) => el.id !== action.payload.id);

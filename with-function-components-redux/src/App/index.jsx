@@ -6,7 +6,16 @@ import AddTodo from "../components/AddTodo";
 import Todo from "../components/Todo";
 import styles from "./main.module.css";
 
-function App({ addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, todos, incrementAct, decrementAct, counter }) {
+const App = ({
+  addTodoAct,
+  removeTodoAct,
+  changeTodoAct,
+  reOrderTodoAct,
+  todos,
+  incrementAct,
+  decrementAct,
+  counter,
+}) => {
   useEffect(() => {
     console.log(counter);
   }, [counter]);
@@ -33,12 +42,12 @@ function App({ addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, todos, 
     <div className={styles.center}>
       <AddTodo add={addTodo} />
       {todos
-        ? todos.map((el) => (
+        ? todos.map(({ id, name, isDone }) => (
             <Todo
-              key={el.id}
-              id={el.id}
-              text={el.name}
-              done={el.isDone}
+              key={id}
+              id={id}
+              text={name}
+              done={isDone}
               remove={deleteTodo}
               changeState={changeTodoState}
               reOrder={reOrderTodos}
@@ -47,7 +56,7 @@ function App({ addTodoAct, removeTodoAct, changeTodoAct, reOrderTodoAct, todos, 
         : null}
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {

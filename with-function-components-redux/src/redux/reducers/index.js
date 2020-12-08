@@ -1,7 +1,7 @@
 import todos from "./todos";
 import counter from "./counter";
 
-function mergeReducers(reducers) {
+const mergeReducers = (reducers) => {
   // input should be an object;
   if (typeof reducers !== "object") {
     console.error("Argument, passed to the mergeReducers, is not an object");
@@ -32,9 +32,9 @@ function mergeReducers(reducers) {
     }
     return newStoreState;
   };
-}
+};
 
-function mergeReducersFlat(reducers) {
+const mergeReducersFlat = (reducers) => {
   // input should be an object;
   if (typeof reducers !== "object") {
     console.error("Argument, passed to the mergeReducersFlat, is not an object");
@@ -71,6 +71,6 @@ function mergeReducersFlat(reducers) {
     }
     return newStoreState;
   };
-}
+};
 
 export default mergeReducers({ todos, counter });
